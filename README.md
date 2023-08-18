@@ -49,13 +49,13 @@ Every route is protected by validation using express-validator and secured with 
 
 The main challenge was to handle concurrent requests, so we can prevent common proplems like read-uncommited, so i used MySQL transactions with its default repeatable read isolation level.
 
-<img src="levels.png" alt="Logo" width="600" height="300">
+<img src="levels.png" alt="Logo" width="900" height="500">
 
 The databse has 2 tables:
 1- users which have: - id - name - email - password - points : default 500
 2- transactions which have: - id - amount - created at : default CURRENT_TIMESTAMP - confirmed at : default null, when confirm the null will to change to CURRENT_TIMESTAMP - receiver id - sender id
 
-<img src="erd.png" alt="Logo" width="600" height="300">
+<img src="erd.png" alt="Logo" width="900" height="500">
 
 ### Prerequisites
 
