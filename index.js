@@ -1,7 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const morgan = require("morgan");
-
+const database = require("./database");
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
 
@@ -14,10 +14,15 @@ server.use(express.json());
 server.use(morgan("common"));
 
 //####__server_and_db_initialization__########################################
-
-const expressServer = server.listen(port, () => {
-  console.log(`server is listening at port: ${port}`);
-});
+database
+  .query("SELECT 1")
+  .then((data) => {
+    console.log("DB Connected successfully");
+    const expressServer = server.listen(port, () => {
+      console.log(`server is listening at port: ${port}`);
+    });
+  })
+  .catch((error) => console.log("database connection failed cuz: " + error));
 
 //#####################################################__routes__##########################################################
 server.use("/auth", authRoute);
