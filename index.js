@@ -33,7 +33,7 @@ server.use((request, response, next) => {
   response.status(404).json({ message: "Page Not Found..!" });
 });
 
-//###################__error-global-middleware__#################################
+//###################__error-global-handling-middleware__#################################
 server.use((error, request, response, next) => {
   // console.log(error);
   response.status(error.status || 505).json({ message: error + "" });

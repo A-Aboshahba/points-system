@@ -1,50 +1,61 @@
 const { param, body } = require("express-validator");
 
-module.exports.new = [
-  body("senderId")
+module.exports.newTransaction = [
+  body("sender_id")
     .notEmpty()
-    .withMessage("senderId cant be blank")
+    .withMessage("sender_id cant be blank")
     .isInt()
-    .withMessage("senderId must be numerical")
+    .withMessage("sender_id must be numerical")
     .custom((value) => {
       if (Number(value) <= 0) {
-        throw new Error("senderId must be a positive integer");
+        throw new Error("sender_id must be a positive integer");
       }
       return true;
     }),
-  body("receiverId")
+  body("receiver_id")
     .notEmpty()
-    .withMessage("receiverId cant be blank")
+    .withMessage("receiver_id cant be blank")
     .isInt()
-    .withMessage("receiverId must be numerical")
+    .withMessage("receiver_id must be numerical")
     .custom((value) => {
       if (Number(value) <= 0) {
-        throw new Error("receiverId must be a positive integer");
+        throw new Error("receiver_id must be a positive integer");
       }
       return true;
     }),
-  body("points")
+  body("amount")
     .notEmpty()
-    .withMessage("points cant be blank")
+    .withMessage("amount cant be blank")
     .isInt()
-    .withMessage("points must be numerical")
+    .withMessage("amount must be numerical")
     .custom((value) => {
       if (Number(value) <= 0) {
-        throw new Error("points must be a positive integer");
+        throw new Error("amount must be a positive integer");
       }
       return true;
     }),
 ];
 
-module.exports.confirm = [
-  body("transferId")
+module.exports.confirmTransaction = [
+  body("sender_id")
     .notEmpty()
-    .withMessage("transferId cant be blank")
+    .withMessage("sender_id cant be blank")
     .isInt()
-    .withMessage("transferId must be numerical")
+    .withMessage("sender_id must be numerical")
     .custom((value) => {
       if (Number(value) <= 0) {
-        throw new Error("transferId must be a positive integer");
+        throw new Error("sender_id must be a positive integer");
+      }
+      return true;
+    }),
+  body("transaction_id")
+    .notEmpty()
+    .withMessage("transaction_id cant be blank")
+    .isInt()
+    .withMessage("transaction_id must be numerical")
+    .custom((value) => {
+      if (Number(value) <= 0) {
+        throw new Error("transaction_id must be a positive integer");
       }
       return true;
     }),

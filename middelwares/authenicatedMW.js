@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const verifyToken = (request, response, next) => {
-  //check if the request ahs token
-  // console.log(request.headers.authorization);
+  //check if the request has token
   const authHeader = request.headers.authorization;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
@@ -9,12 +8,9 @@ const verifyToken = (request, response, next) => {
       if (err) {
         let error = new Error("Token is not valid.!");
         error.status = 403;
-        // next(error);
-        // response.status(403).json("Token is not valid!");
         throw error;
       } else {
         request.accessToken = user;
-        // console.log(request.accessToken);
         next();
       }
     });
@@ -25,10 +21,16 @@ const verifyToken = (request, response, next) => {
     throw error;
   }
 };
-const isAdmin = (request, repsone, next) => {
+const verifyTokenAndAuthorizSender = (request, repsone, next) => {
   verifyToken(request, repsone, () => {
-    if (request.accessToken.isAdmin) next();
+    console.log(request.accessToken.user_id, request.body.sender_id);
+    if (
+      request.accessToken.user_id == request.body.sender_id ||
+      request.accessToken.user_id == request.params.id
+    )
+      next();
     else {
+      console.log("asd");
       let error = new Error("not Authorized..!");
       error.status = 403;
       throw error;
@@ -36,24 +38,6 @@ const isAdmin = (request, repsone, next) => {
   });
 };
 
-const verifyTokenAndAuthorization = (request, respsone, next) => {
-  verifyToken(request, respsone, () => {
-    if (
-      request.accessToken._id === request.params.id ||
-      request.accessToken._id === request.params.userId ||
-      request.accessToken._id === request.body.userId ||
-      request.accessToken.isAdmin
-    ) {
-      next();
-    } else {
-      let error = new Error("not Authorized...!");
-      error.status = 403;
-      throw error;
-    }
-  });
-};
 module.exports = {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  isAdmin,
+  verifyTokenAndAuthorizSender,
 };
