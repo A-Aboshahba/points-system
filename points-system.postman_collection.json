@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "673fd3a1-4266-474c-8105-11bba8d6d65f",
+		"name": "points-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "sign_up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ahmed\",\r\n    \"email\":\"ahmed@test.com\",\r\n    \"password\":\"ahmed123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "log_in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"abdo@test.com\",\r\n    \"password\":\"abdo123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "new_transfer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJuYW1lIjoiYWJkbyIsImVtYWlsIjoiYWJkb0B0ZXN0LmNvbSIsInBvaW50cyI6ODAwLCJpYXQiOjE2OTIzODYyNTUsImV4cCI6MTY5MjQ3MjY1NX0.ma1r9nVGvtCA7m6ErnWIBy4L9j3W9efcd9uXd1pPW0g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender_id\":\"5\",\r\n    \"receiver_id\":\"6\",\r\n    \"amount\":\"200\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm_transfer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJuYW1lIjoiYWJkbyIsImVtYWlsIjoiYWJkb0B0ZXN0LmNvbSIsInBvaW50cyI6ODAwLCJpYXQiOjE2OTIzODYyNTUsImV4cCI6MTY5MjQ3MjY1NX0.ma1r9nVGvtCA7m6ErnWIBy4L9j3W9efcd9uXd1pPW0g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender_id\":\"5\",\r\n    \"transaction_id\":\"7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/confirm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_points",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJuYW1lIjoiYWJkbyIsImVtYWlsIjoiYWJkb0B0ZXN0LmNvbSIsInBvaW50cyI6ODAwLCJpYXQiOjE2OTIzODYyNTUsImV4cCI6MTY5MjQ3MjY1NX0.ma1r9nVGvtCA7m6ErnWIBy4L9j3W9efcd9uXd1pPW0g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/points/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"points",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all_transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/allTransactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"allTransactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
